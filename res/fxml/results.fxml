@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" prefHeight="486.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.ResultsController">
+   <children>
+      <Label text="Ответы">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </VBox.margin>
+      </Label>
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="433.0" prefWidth="864.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
+         <content>
+            <VBox fx:id="resultBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" />
+         </content>
+      </ScrollPane>
+      <HBox maxHeight="100.0" minHeight="40.0" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onAgainClick" text="Пройти эту тему заново">
+                     <HBox.margin>
+                        <Insets left="196.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onBackClick" text="Вернуться">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

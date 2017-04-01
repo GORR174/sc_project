@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.LoginController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label text="Вход">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="30.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label text="Фамилия Имя:">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="nameField" alignment="CENTER" maxWidth="200.0" prefHeight="25.0" prefWidth="260.0" promptText="Фамилия Имя" />
+                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="803.0">
+                     <children>
+                        <MenuButton fx:id="classMenu" mnemonicParsing="false" text="Класс">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="1" />
+                              <MenuItem mnemonicParsing="false" text="2" />
+                              <MenuItem mnemonicParsing="false" text="3" />
+                              <MenuItem mnemonicParsing="false" text="4" />
+                              <MenuItem mnemonicParsing="false" text="5" />
+                              <MenuItem mnemonicParsing="false" text="6" />
+                              <MenuItem mnemonicParsing="false" text="7" />
+                              <MenuItem mnemonicParsing="false" text="8" />
+                              <MenuItem mnemonicParsing="false" text="9" />
+                              <MenuItem mnemonicParsing="false" text="10" />
+                              <MenuItem mnemonicParsing="false" text="11" />
+                           </items>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="20.0" right="30.0" top="10.0" />
+                           </HBox.margin>
+                        </MenuButton>
+                        <MenuButton fx:id="letterMenu" mnemonicParsing="false" text="Буква">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="А" />
+                              <MenuItem mnemonicParsing="false" text="Б" />
+                              <MenuItem mnemonicParsing="false" text="В" />
+                              <MenuItem mnemonicParsing="false" text="Г" />
+                              <MenuItem mnemonicParsing="false" text="Д" />
+                              <MenuItem mnemonicParsing="false" text="Е" />
+                           </items>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="30.0" right="20.0" top="10.0" />
+                           </HBox.margin>
+                        </MenuButton>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="803.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onStudentLogin" prefHeight="25.0" prefWidth="63.0" text="Ученик">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="40.0" top="15.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#onTeacherLogin" prefHeight="25.0" prefWidth="63.0" text="Учитель">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="40.0" right="10.0" top="15.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </center>
+         <bottom>
+            <VBox alignment="TOP_RIGHT" prefHeight="36.0" prefWidth="864.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#OnAboutClick" text="Об авторе">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>

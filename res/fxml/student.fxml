@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.StudentController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Проверочный тест">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="taskText" alignment="TOP_LEFT" prefHeight="235.0" prefWidth="649.0" style="-fx-border-color: CCCCCC; -fx-background-color: FCFCFC; -fx-border-width: 5; -fx-border-radius: 5;" text="Задание" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="latestTime" minWidth="254.0" prefHeight="35.0" prefWidth="254.0" text="Осталось времени: 00:12:47">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="resultField" prefHeight="44.0" prefWidth="333.0" promptText="Ответ">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button minWidth="83.0" mnemonicParsing="false" onAction="#onSendClick" prefHeight="41.0" prefWidth="83.0" text="Ответить">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Label fx:id="lastResult" maxWidth="263.0" prefHeight="36.0" prefWidth="263.0" text="Ваш ответ: не решено">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <BorderPane prefHeight="75.0" prefWidth="864.0">
+               <center>
+                  <HBox alignment="CENTER" maxHeight="100.0" prefHeight="90.0" prefWidth="864.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onPreviousClick" prefHeight="51.0" prefWidth="94.0" text="Вернуться">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="250.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Label fx:id="thisTask" text="1/15">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#onNextClick" prefHeight="51.0" prefWidth="94.0" text="Пропустить">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                        <Button maxWidth="90.0" minWidth="90.0" mnemonicParsing="false" onAction="#onEndClick" text="Закончить">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="150.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </center>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

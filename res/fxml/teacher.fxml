@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.TeacherController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Label text="Панель учителя" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <BorderPane.margin>
+                  <Insets top="30.0" />
+               </BorderPane.margin>
+            </Label>
+         </top>
+         <bottom>
+            <BorderPane prefHeight="43.0" prefWidth="864.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#onSaveClick" text="Сохранить" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" left="50.0" right="10.0" top="10.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </center>
+               <right>
+                  <Button mnemonicParsing="false" onAction="#onBackClick" text="Назад" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </right>
+            </BorderPane>
+         </bottom>
+         <center>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" prefHeight="20.0" prefWidth="1158.0" text="Выбор темы:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" prefHeight="58.0" prefWidth="864.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="23.0" prefWidth="560.0">
+                           <children>
+                              <Button minWidth="70.0" mnemonicParsing="false" onAction="#onAddTheme" prefHeight="25.0" prefWidth="81.0" text="Добавить">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <MenuButton fx:id="themeSelector" minWidth="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="626.0" text="Тема" />
+                              <Button minWidth="70.0" mnemonicParsing="false" onAction="#onChangeTheme" text="Изменить">
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button minWidth="70.0" mnemonicParsing="false" onAction="#onDeleteTheme" text="Удалить">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <VBox fx:id="themeConfigVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="20.0" prefWidth="1158.0" text="Настройка темы:">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER_RIGHT" prefHeight="99.0" prefWidth="143.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Кол-во времени на работу">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="30.0" top="20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox alignment="CENTER_RIGHT">
+                                       <children>
+                                          <TextField fx:id="workTime" prefHeight="25.0" prefWidth="77.0">
+                                             <HBox.margin>
+                                                <Insets left="5.0" right="5.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                          <Label text="минут">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets right="50.0" top="2.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="20.0" prefWidth="1158.0" text="Оценка (в процентах)">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="60.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="12.0" prefWidth="240.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="41.0" prefWidth="36.0">
+                                             <children>
+                                                <Label text="2" />
+                                                <TextField fx:id="result2">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </TextField>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="41.0" prefWidth="36.0">
+                                             <children>
+                                                <Label text="3" />
+                                                <TextField fx:id="result3" />
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="41.0" prefWidth="36.0">
+                                             <children>
+                                                <Label text="4" />
+                                                <TextField fx:id="result4" />
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                          <VBox alignment="CENTER" prefHeight="41.0" prefWidth="36.0">
+                                             <children>
+                                                <Label text="5" />
+                                                <TextField editable="false" text="100" />
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets left="50.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <Label text="Настройка заданий">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#onAddNewTask" text="Добавить">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <MenuButton fx:id="taskSelector" mnemonicParsing="false" prefHeight="25.0" prefWidth="286.0" text="Задание">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </MenuButton>
+                              <Button mnemonicParsing="false" onAction="#onTaskChange" text="Изменить">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#onTaskDelete" text="Удалить">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
