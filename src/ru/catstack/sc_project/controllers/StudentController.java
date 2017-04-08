@@ -80,7 +80,7 @@ public class StudentController extends GController{
     public void onSendClick(ActionEvent actionEvent) throws Exception {
         Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).setLastResult(resultField.getText());
 
-        if(Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).getTask().getResult().equals(resultField.getText()))
+        if(Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).getTask().getResult().equalsIgnoreCase(resultField.getText()))
             Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).setCorrectly(true);
         else
             Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).setCorrectly(false);

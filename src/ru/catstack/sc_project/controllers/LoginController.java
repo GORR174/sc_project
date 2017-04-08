@@ -8,7 +8,6 @@ import ru.catstack.fx_engine.impl.GController;
 import ru.catstack.fx_engine.resources.GApp;
 import ru.catstack.sc_project.objects.Theme;
 import ru.catstack.sc_project.objects.user.Teacher;
-import ru.catstack.sc_project.objects.user.UserInfo;
 import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
 
@@ -41,10 +40,10 @@ public class LoginController extends GController {
         ObjectMapper mapper = new ObjectMapper();
 
         if(teacherFile.exists())
-            Core.teacher = mapper.readValue(teacherFile, Teacher[].class); // changed
+            Core.teacher = mapper.readValue(teacherFile, Teacher[].class);
         else {
             for(int i=1; i<12; i++){
-                Core.teacher[i] = new Teacher(); // changed
+                Core.teacher[i] = new Teacher();
             }
             mapper.writeValue(teacherFile, Core.teacher);
         }
@@ -64,10 +63,10 @@ public class LoginController extends GController {
 
     public void onStudentLogin(ActionEvent actionEvent) throws Exception {
         Core.userInfo.setThisTheme(null);
-        if(Core.teacher[Integer.parseInt(classMenu.getText())].getThemes().size() != 0) { //changed
+        if(Core.teacher[Integer.parseInt(classMenu.getText())].getThemes().size() != 0) {
 
             List<String> choices = new ArrayList<>();
-            for (Theme theme : Core.teacher.getThemes()) {
+            for (Theme theme : Core.teacher[Integer.parseInt(classMenu.getText())].getThemes()) {
                 choices.add(theme.getName());
             }
 
@@ -78,7 +77,7 @@ public class LoginController extends GController {
 
             Optional<String> result = dialog.showAndWait();
             if (result.isPresent() && !result.get().equals("Тема")){
-                Core.userInfo.setThisTheme(Core.teacher.getThemeByName(result.get()));
+                Core.userInfo.setThisTheme(Core.teacher[Integer.parseInt(classMenu.getText())].getThemeByName(result.get()));
                 writeUserInfo();
                 GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
             }
@@ -93,17 +92,25 @@ public class LoginController extends GController {
 
     public void onTeacherLogin(ActionEvent actionEvent) throws Exception {
         writeUserInfo();
-        TextInputDialog inputDialog = new TextInputDialog();
-        inputDialog.setTitle("Подтверждение");
-        inputDialog.setContentText("Введите пароль");
-        inputDialog.setHeaderText(null);
-        Optional<String> password = inputDialog.showAndWait();
-        if(password.isPresent() && password.get().equals("123"))
-            GApp.app.setScene(FXML_FILES.TEACHER.getUrl());
-        else if(password.isPresent()) {
+        if(!Core.userInfo.getClassNumber().equals("Класс")) {
+            TextInputDialog inputDialog = new TextInputDialog();
+            inputDialog.setTitle("Подтверждение");
+            inputDialog.setContentText("Введите пароль");
+            inputDialog.setHeaderText(null);
+            Optional<String> password = inputDialog.showAndWait();
+            if (password.isPresent() && password.get().equals("123"))
+                GApp.app.setScene(FXML_FILES.TEACHER.getUrl());
+            else if (password.isPresent()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setContentText("Неверный пароль");
+                alert.setHeaderText(null);
+                alert.showAndWait();
+            }
+        } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Ошибка");
-            alert.setContentText("Неверный пароль");
+            alert.setContentText("Не выбран класс");
             alert.setHeaderText(null);
             alert.showAndWait();
         }

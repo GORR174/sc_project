@@ -7,7 +7,7 @@ import ru.catstack.sc_project.objects.user.Teacher;
 import ru.catstack.sc_project.objects.user.UserInfo;
 
 public class Core {
-    public static Teacher[] teacher = new Teacher[12]; //changed
+    public static Teacher[] teacher = new Teacher[12];
     public static Student student;
     public static UserInfo userInfo;
     public static TeacherController teacherController;

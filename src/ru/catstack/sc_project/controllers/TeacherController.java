@@ -49,7 +49,7 @@ public class TeacherController extends GController {
         result3.setText("60");
         result4.setText("80");
         if(Core.userInfo.getThisTheme() != null) {
-            workTime.setText("" + Core.teacher.getThemes().get(0).getTime());
+            workTime.setText("" + Core.teacher[Integer.parseInt(Core.userInfo.getClassNumber())].getThemes().get(0).getTime());
             result2.setText("20");
             result3.setText("60");
             result4.setText("80");
@@ -83,7 +83,7 @@ public class TeacherController extends GController {
             Core.userInfo.getThisTheme().setResult4(Integer.parseInt(result4.getText()));
         }
 
-        for (Theme theme : Core.teacher.getThemes()) {
+        for (Theme theme : Core.teacher[Integer.parseInt(Core.userInfo.getClassNumber())].getThemes()) {
             if(theme.getqCount()>theme.getTasks().size())
                 canSave = false;
         }
@@ -123,7 +123,7 @@ public class TeacherController extends GController {
 
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            Core.teacher.getThemes().add(new Theme(result.get()));
+            Core.teacher[Integer.parseInt(Core.userInfo.getClassNumber())].getThemes().add(new Theme(result.get()));
         }
 
         themeSelectorUpdate();
@@ -152,7 +152,7 @@ public class TeacherController extends GController {
     }
 
     public void onDeleteTheme(ActionEvent actionEvent) {
-        Core.teacher.getThemes().remove(Core.userInfo.getThisTheme());
+        Core.teacher[Integer.parseInt(Core.userInfo.getClassNumber())].getThemes().remove(Core.userInfo.getThisTheme());
         Core.userInfo.setThisTheme(null);
         themeSelectorUpdate();
         themeSelector.setText("Тема");
@@ -175,6 +175,7 @@ public class TeacherController extends GController {
         if(Core.userInfo.getThisTheme() != null) {
             Core.userInfo.getThisTheme().getTasks().remove(Core.userInfo.getThisTask());
             taskSelector.setText("Задание");
+            Core.userInfo.getThisTask().setText("Задание");
         }
         taskSelectorUpdate();
         taskSelector.setText("Задание");
@@ -183,7 +184,7 @@ public class TeacherController extends GController {
     public void themeSelectorUpdate(){
         taskSelectorUpdate();
         themeSelector.getItems().remove(0, themeSelector.getItems().size());
-        for (Theme theme : Core.teacher.getThemes()) {
+        for (Theme theme : Core.teacher[Integer.parseInt(Core.userInfo.getClassNumber())].getThemes()) {
             themeSelector.getItems().add(new MenuItem(theme.getName()));
         }
         for (MenuItem menuItem : themeSelector.getItems()) {
@@ -193,7 +194,7 @@ public class TeacherController extends GController {
             menuItem.setGraphic(lbl);
             menuItem.setOnAction(event -> {
                 themeSelector.setText(lbl.getText());
-                Core.userInfo.setThisTheme(Core.teacher.getThemeByName(lbl.getText()));
+                Core.userInfo.setThisTheme(Core.teacher[Integer.parseInt(Core.userInfo.getClassNumber())].getThemeByName(lbl.getText()));
                 taskSelectorUpdate();
                 workTime.setText("" + Core.userInfo.getThisTheme().getTime());
                 result2.setText("" + Core.userInfo.getThisTheme().getResult2());
