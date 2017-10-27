@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import ru.catstack.fx_engine.impl.GController;
 import ru.catstack.fx_engine.resources.GApp;
 import ru.catstack.sc_project.objects.Theme;
+import ru.catstack.sc_project.objects.help_objects.PasswordDialog;
 import ru.catstack.sc_project.objects.user.Teacher;
 import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
@@ -63,29 +64,41 @@ public class LoginController extends GController {
 
     public void onStudentLogin(ActionEvent actionEvent) throws Exception {
         Core.userInfo.setThisTheme(null);
-        if(Core.teacher[Integer.parseInt(classMenu.getText())].getThemes().size() != 0) {
+        if(!classMenu.getText().equals("Класс") && !nameField.getText().equals("") && !letterMenu.getText().equals("Буква")) {
+            if (Core.teacher[Integer.parseInt(classMenu.getText())].getThemes().size() != 0) {
 
-            List<String> choices = new ArrayList<>();
-            for (Theme theme : Core.teacher[Integer.parseInt(classMenu.getText())].getThemes()) {
-                choices.add(theme.getName());
-            }
+                List<String> choices = new ArrayList<>();
+                for (Theme theme : Core.teacher[Integer.parseInt(classMenu.getText())].getThemes()) {
+                    choices.add(theme.getName());
+                }
 
-            ChoiceDialog<String> dialog = new ChoiceDialog<>("Тема", choices);
-            dialog.setTitle("Выберите тему");
-            dialog.setHeaderText(null);
-            dialog.setContentText("Выберите тему:");
+                ChoiceDialog<String> dialog = new ChoiceDialog<>("Тема", choices);
+                dialog.setTitle("Выберите тему");
+                dialog.setHeaderText(null);
+                dialog.setContentText("Выберите тему:");
 
-            Optional<String> result = dialog.showAndWait();
-            if (result.isPresent() && !result.get().equals("Тема")){
-                Core.userInfo.setThisTheme(Core.teacher[Integer.parseInt(classMenu.getText())].getThemeByName(result.get()));
-                writeUserInfo();
-                GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
+                Optional<String> result = dialog.showAndWait();
+                if (result.isPresent() && !result.get().equals("Тема")) {
+                    Core.userInfo.setThisTheme(Core.teacher[Integer.parseInt(classMenu.getText())].getThemeByName(result.get()));
+                    writeUserInfo();
+                    if (Core.userInfo.getThisTheme().getHelp() != null) {
+                        GApp.app.setScene(FXML_FILES.THEORY.getUrl());
+                    } else {
+                        GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
+                    }
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Ошибка");
+                alert.setContentText("Обратитесь к учителю, для настройки программы");
+                alert.setHeaderText("Отсутствуют темы");
+                alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Ошибка");
-            alert.setContentText("Обратитесь к учителю, для настройки программы");
-            alert.setHeaderText("Отсутствуют темы");
+            alert.setContentText("Введите ваше имя, фамилию, выберите класс и букву");
+            alert.setHeaderText(null);
             alert.showAndWait();
         }
     }
@@ -93,12 +106,15 @@ public class LoginController extends GController {
     public void onTeacherLogin(ActionEvent actionEvent) throws Exception {
         writeUserInfo();
         if(!Core.userInfo.getClassNumber().equals("Класс")) {
-            TextInputDialog inputDialog = new TextInputDialog();
-            inputDialog.setTitle("Подтверждение");
-            inputDialog.setContentText("Введите пароль");
-            inputDialog.setHeaderText(null);
-            Optional<String> password = inputDialog.showAndWait();
-            if (password.isPresent() && password.get().equals("123"))
+//            TextInputDialog inputDialog = new TextInputDialog();
+//            inputDialog.setTitle("Подтверждение");
+//            inputDialog.setContentText("Введите пароль");
+//            inputDialog.setHeaderText(null);
+
+            PasswordDialog passwordDialog = new PasswordDialog();
+
+            Optional<String> password = passwordDialog.showAndWait();
+            if (password.isPresent() && password.get().equals("12345"))
                 GApp.app.setScene(FXML_FILES.TEACHER.getUrl());
             else if (password.isPresent()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);

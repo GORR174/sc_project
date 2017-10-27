@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" prefHeight="486.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.ResultsController">
+<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.TheoryController">
    <children>
-      <Label text="Ответы">
+      <Label text="Теория">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
@@ -18,31 +19,19 @@
       </Label>
       <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="433.0" prefWidth="864.0" vbarPolicy="ALWAYS" VBox.vgrow="ALWAYS">
          <content>
-            <VBox fx:id="resultBox" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" />
+            <VBox fx:id="helpBox" alignment="TOP_CENTER" minHeight="-Infinity" />
          </content>
       </ScrollPane>
-      <HBox maxHeight="100.0" minHeight="40.0" prefHeight="100.0" prefWidth="200.0">
+      <HBox maxHeight="100.0" minHeight="40.0" prefHeight="45.0" prefWidth="864.0">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#onTheoryClick" text="Теория">
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onAgainClick" text="Пройти эту тему заново">
+                  <Button mnemonicParsing="false" onAction="#onStartClick" text="Начать тест">
                      <HBox.margin>
-                        <Insets />
+                        <Insets left="196.0" />
                      </HBox.margin>
                   </Button>
                </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                <children>

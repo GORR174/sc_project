@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Theme {
 
     private String name = "Название темы";
+    private String help = null;
     private int time = 30;
     private int qCount = 15;
     private int result2 = 20;
@@ -98,5 +99,13 @@ public class Theme {
 
     public void setResult5(int result5) {
         this.result5 = result5;
+    }
+
+    public String getHelp() {
+        return help;
+    }
+
+    public void setHelp(String help) {
+        this.help = help;
     }
 }

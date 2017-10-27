@@ -7,11 +7,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.EditTaskController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.AddTheoryController">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Изменить задание">
+            <Label text="Добавить теорию">
                <font>
                   <Font name="System Bold" size="25.0" />
                </font>
@@ -19,52 +19,17 @@
                   <Insets bottom="12.0" left="15.0" right="15.0" top="14.0" />
                </VBox.margin>
             </Label>
-            <TextArea fx:id="taskText" maxHeight="235.0" maxWidth="649.0" minHeight="235.0" minWidth="649.0" prefHeight="235.0" prefWidth="649.0" promptText="Текст задания" style="-fx-border-color: CCCCCC; -fx-background-color: FCFCFC; -fx-border-width: 5; -fx-border-radius: 5;" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </TextArea>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="461.0" prefWidth="864.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="206.0" prefWidth="176.0">
-                     <children>
-                        <Button alignment="CENTER" maxWidth="185.0" minWidth="90.0" mnemonicParsing="false" onAction="#onSetImageClick" prefHeight="30.0" prefWidth="169.0" text="Указать изображение...">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets bottom="20.0" />
-                           </VBox.margin>
-                        </Button>
-                        <Button alignment="CENTER" maxWidth="185.0" minWidth="90.0" mnemonicParsing="false" onAction="#onDeleteImageClick" prefHeight="30.0" prefWidth="169.0" text="Удалить изображение">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
+                  <TextArea fx:id="taskText" maxHeight="484.0" maxWidth="812.0" prefHeight="437.0" prefWidth="691.0" promptText="Теория..." style="-fx-border-color: CCCCCC; -fx-background-color: FCFCFC; -fx-border-width: 5; -fx-border-radius: 5;" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                      <HBox.margin>
-                        <Insets right="30.0" />
+                        <Insets left="20.0" />
                      </HBox.margin>
-                  </VBox>
-                  <BorderPane maxHeight="206.0" maxWidth="306.0" minHeight="206.0" minWidth="306.0" prefHeight="206.0" prefWidth="306.0" style="-fx-border-color: CCCCCC; -fx-background-color: FCFCFC; -fx-border-width: 3; -fx-border-radius: 3;">
-                     <center>
-                        <ImageView fx:id="taskImage" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" x="3.0" y="3.0" BorderPane.alignment="CENTER">
-                           <viewport>
-                              <Rectangle2D />
-                           </viewport>
-                           <BorderPane.margin>
-                              <Insets />
-                           </BorderPane.margin>
-                        </ImageView>
-                     </center>
-                     <HBox.margin>
-                        <Insets right="40.0" />
-                     </HBox.margin>
-                  </BorderPane>
-                  <VBox alignment="CENTER" prefHeight="151.0" prefWidth="184.0">
+                  </TextArea>
+                  <VBox alignment="CENTER" prefHeight="437.0" prefWidth="150.0">
                      <children>
                         <Label text="Вставить символы: ">
                            <font>
@@ -164,32 +129,14 @@
                               <Insets top="30.0" />
                            </VBox.margin>
                         </HBox>
+                        <Button mnemonicParsing="false" onAction="#onAddImageClick" text="Добавить изображение">
+                           <VBox.margin>
+                              <Insets top="60.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                   </VBox>
                </children>
-               <VBox.margin>
-                  <Insets top="8.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="864.0">
-               <children>
-                  <Label text="Ответ:">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="8.0" />
-                     </HBox.margin>
-                  </Label>
-                  <TextField fx:id="result" promptText="ответ">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-               </children>
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
             </HBox>
             <BorderPane prefHeight="75.0" prefWidth="864.0">
                <center>
@@ -203,10 +150,13 @@
                               <Insets right="150.0" />
                            </HBox.margin>
                         </Button>
-                        <Button alignment="CENTER" maxWidth="90.0" minWidth="90.0" mnemonicParsing="false" onAction="#onSaveClick" text="Сохранить">
+                        <Button alignment="CENTER" maxWidth="90.0" minWidth="90.0" mnemonicParsing="false" onAction="#onAddClick" text="Добавить">
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </Button>
                      </children>
                   </HBox>

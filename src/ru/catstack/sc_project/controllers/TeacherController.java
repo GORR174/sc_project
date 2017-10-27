@@ -73,7 +73,6 @@ public class TeacherController extends GController {
 
     public void onSaveClick(ActionEvent actionEvent) throws IOException {
 
-        boolean canSave = true;
 
         if (Core.userInfo.getThisTheme() != null) {
             Core.userInfo.getThisTheme().setTime(Integer.parseInt(workTime.getText()));
@@ -82,6 +81,8 @@ public class TeacherController extends GController {
             Core.userInfo.getThisTheme().setResult3(Integer.parseInt(result3.getText()));
             Core.userInfo.getThisTheme().setResult4(Integer.parseInt(result4.getText()));
         }
+
+        boolean canSave = true;
 
         for (Theme theme : Core.teacher[Integer.parseInt(Core.userInfo.getClassNumber())].getThemes()) {
             if(theme.getqCount()>theme.getTasks().size())
@@ -226,4 +227,9 @@ public class TeacherController extends GController {
         }
     }
 
+    public void onTheoryClick(ActionEvent actionEvent) throws Exception {
+        if(Core.userInfo.getThisTheme() != null) {
+            GApp.app.addModalWindow(FXML_FILES.ADD_THEORY.getUrl(), "Теория", GApp.app.getStage(), false);
+        }
+    }
 }

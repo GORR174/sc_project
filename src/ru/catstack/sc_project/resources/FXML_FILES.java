@@ -12,6 +12,9 @@ public enum  FXML_FILES {
     ADD_TASK("addTask.fxml"),
     EDIT_TASK("editTask.fxml"),
     RESULTS("results.fxml"),
+    ADD_THEORY("addTheory.fxml"),
+    THEORY("theory.fxml"),
+    IMAGES("images.fxml"),
     ;
 
     private URL url;

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.StudentController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.StudentController">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="28.0" layoutY="-14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="-28.0" AnchorPane.topAnchor="-14.0">
          <children>
             <Label text="Проверочный тест">
                <font>
@@ -18,11 +19,23 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </VBox.margin>
             </Label>
-            <Label fx:id="taskText" alignment="TOP_LEFT" prefHeight="235.0" prefWidth="649.0" style="-fx-border-color: CCCCCC; -fx-background-color: FCFCFC; -fx-border-width: 5; -fx-border-radius: 5;" text="Задание" wrapText="true">
+            <Label fx:id="taskText" alignment="TOP_LEFT" contentDisplay="BOTTOM" prefHeight="264.0" prefWidth="648.0" style="-fx-border-color: CCCCCC; -fx-background-color: FCFCFC; -fx-border-width: 5; -fx-border-radius: 5;" text="Задание" wrapText="true">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
+            <BorderPane maxHeight="206.0" maxWidth="306.0" minHeight="206.0" minWidth="306.0" prefHeight="206.0" prefWidth="306.0" style="-fx-border-color: CCCCCC; -fx-background-color: FCFCFC; -fx-border-width: 3; -fx-border-radius: 3;">
+               <center>
+                  <ImageView fx:id="taskImage" fitHeight="200.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" x="3.0" y="3.0" BorderPane.alignment="CENTER">
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+               </center>
+               <VBox.margin>
+                  <Insets top="6.0" />
+               </VBox.margin>
+            </BorderPane>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label fx:id="latestTime" minWidth="254.0" prefHeight="35.0" prefWidth="254.0" text="Осталось времени: 00:12:47">
@@ -61,7 +74,7 @@
             </HBox>
             <BorderPane prefHeight="75.0" prefWidth="864.0">
                <center>
-                  <HBox alignment="CENTER" maxHeight="100.0" prefHeight="90.0" prefWidth="864.0" BorderPane.alignment="CENTER">
+                  <HBox alignment="CENTER" maxHeight="100.0" prefHeight="80.0" prefWidth="864.0" BorderPane.alignment="CENTER">
                      <children>
                         <Button mnemonicParsing="false" onAction="#onPreviousClick" prefHeight="51.0" prefWidth="94.0" text="Вернуться">
                            <font>
@@ -93,6 +106,9 @@
                            </HBox.margin>
                         </Button>
                      </children>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
                   </HBox>
                </center>
             </BorderPane>

@@ -3,6 +3,7 @@ package ru.catstack.sc_project.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -93,5 +94,17 @@ public class ResultsController extends GController{
 
     public void onBackClick(ActionEvent actionEvent) throws Exception {
         GApp.app.setScene(FXML_FILES.LOGIN.getUrl());
+    }
+
+    public void onTheoryClick(ActionEvent actionEvent) throws Exception {
+        if (Core.userInfo.getThisTheme().getHelp() != null) {
+            GApp.app.setScene(FXML_FILES.THEORY.getUrl());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setContentText(null);
+            alert.setHeaderText("Отсутствует блок теории для данной темы");
+            alert.showAndWait();
+        }
     }
 }

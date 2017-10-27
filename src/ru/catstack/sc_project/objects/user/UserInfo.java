@@ -12,6 +12,8 @@ public class UserInfo {
     private ThemeTask thisTask;
     private Theme thisTheme;
 
+    private String thisImage = null;
+
     public String getName() {
         return name;
     }
@@ -50,5 +52,13 @@ public class UserInfo {
 
     public void setThisTheme(Theme thisTheme) {
         this.thisTheme = thisTheme;
+    }
+
+    public String getThisImage() {
+        return thisImage;
+    }
+
+    public void setThisImage(String thisImage) {
+        this.thisImage = thisImage;
     }
 }

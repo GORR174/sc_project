@@ -6,6 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import ru.catstack.fx_engine.impl.GController;
@@ -17,6 +19,7 @@ import ru.catstack.sc_project.objects.user.Student;
 import ru.catstack.sc_project.objects.user.Tasks;
 import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
+import ru.catstack.sc_project.utils.ImageUtils;
 
 import java.util.Optional;
 
@@ -28,6 +31,8 @@ public class StudentController extends GController{
     public Label taskText;
     public TextField resultField;
     public Label lastResult;
+    public ImageView taskImage;
+
 
     private boolean trigger = false;
 
@@ -110,10 +115,17 @@ public class StudentController extends GController{
     }
 
     private void onTaskChanged() throws Exception {
+        StudentTask thisStudentTask = Core.tasks.getTasks().get(Core.student.thisTaskNumber-1);
         thisTask.setText("" + Core.student.thisTaskNumber + "/" + Core.userInfo.getThisTheme().getqCount());
-        lastResult.setText("Ваш ответ: " + Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).getLastResult());
-        taskText.setText(Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).getTask().getText());
+        lastResult.setText("Ваш ответ: " + thisStudentTask.getLastResult());
+        taskText.setText(thisStudentTask.getTask().getText());
         resultField.setText("");
+        if (thisStudentTask.getTask().getImageFile() != null) {
+            Image thisTaskImage = ImageUtils.getAssetsImage(thisStudentTask.getTask().getImageFile());
+            taskImage.setImage(thisTaskImage);
+        } else {
+            taskImage.setImage(null);
+        }
         boolean all = false;
         for (StudentTask studentTask : Core.tasks.getTasks()) {
             if(studentTask.getLastResult().equals("не решено"))
