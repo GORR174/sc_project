@@ -1,6 +1,5 @@
 package ru.catstack.sc_project.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -12,7 +11,6 @@ import ru.catstack.sc_project.objects.user.Teacher;
 import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,19 +34,6 @@ public class LoginController extends GController {
 
         Core.userInfo.setThisTheme(null);
 
-        File teacherFile = new File("teacher.json");
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        if(teacherFile.exists())
-            Core.teacher = mapper.readValue(teacherFile, Teacher[].class);
-        else {
-            for(int i=1; i<12; i++){
-                Core.teacher[i] = new Teacher();
-            }
-            mapper.writeValue(teacherFile, Core.teacher);
-        }
-
         for (MenuItem menuItem : classMenu.getItems()) {
             menuItem.setOnAction(event -> {
                 classMenu.setText(menuItem.getText());
@@ -60,7 +45,6 @@ public class LoginController extends GController {
             });
         }
     }
-
 
     public void onStudentLogin(ActionEvent actionEvent) throws Exception {
         Core.userInfo.setThisTheme(null);
@@ -81,10 +65,18 @@ public class LoginController extends GController {
                 if (result.isPresent() && !result.get().equals("Тема")) {
                     Core.userInfo.setThisTheme(Core.teacher[Integer.parseInt(classMenu.getText())].getThemeByName(result.get()));
                     writeUserInfo();
-                    if (Core.userInfo.getThisTheme().getHelp() != null) {
-                        GApp.app.setScene(FXML_FILES.THEORY.getUrl());
+                    if (Core.userInfo.getThisTheme().getTriesCount() >= 1) {
+                        if (Core.userInfo.getThisTheme().getHelp() != null) {
+                            GApp.app.setScene(FXML_FILES.THEORY.getUrl());
+                        } else {
+                            GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
+                        }
                     } else {
-                        GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Ошибка");
+                        alert.setHeaderText("У вас закончились попытки");
+                        alert.setContentText("Обратитесь к учиителю, чтобы восстановить их.");
+                        alert.showAndWait();
                     }
                 }
             } else {
@@ -140,5 +132,30 @@ public class LoginController extends GController {
         Core.userInfo.setName(nameField.getText());
         Core.userInfo.setClassNumber(classMenu.getText());
         Core.userInfo.setLetter(letterMenu.getText());
+    }
+
+    public void onReTriesClick(ActionEvent actionEvent) {
+        PasswordDialog passwordDialog = new PasswordDialog();
+
+        Optional<String> password = passwordDialog.showAndWait();
+        if (password.isPresent() && password.get().equals("3434")) {
+            for (int i=1; i < 12; i++) {
+                Teacher teacher = Core.teacher[i];
+                for (Theme theme : teacher.getThemes()) {
+                    theme.setTriesCount(3);
+                }
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Информация");
+            alert.setContentText("Попытки восстановлены!");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        } else if (password.isPresent()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setContentText("Неверный пароль");
+            alert.setHeaderText(null);
+            alert.showAndWait();
+        }
     }
 }

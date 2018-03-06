@@ -13,6 +13,7 @@ import ru.catstack.fx_engine.impl.GController;
 import ru.catstack.fx_engine.resources.GApp;
 import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
+import ru.catstack.sc_project.utils.MailUtils;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -39,8 +40,8 @@ public class ResultsController extends GController{
 
         String resultsString = "Ученик: " + Core.userInfo.getName() + System.lineSeparator() +
                 "Класс: " + Core.userInfo.getClassNumber() + " " + Core.userInfo.getLetter() + System.lineSeparator() +
-                "Тема: " + Core.userInfo.getThisTheme().getName() + System.lineSeparator() +
-                "Результаты: " + System.lineSeparator() + System.lineSeparator();
+                "Тема: " + Core.userInfo.getThisTheme().getName() + System.lineSeparator() + System.lineSeparator() +
+                "Результаты: " + System.lineSeparator();
 
         for (int i=0; i<Core.tasks.getTasks().size(); i++) {
 
@@ -86,10 +87,40 @@ public class ResultsController extends GController{
         fileWriter.write(resultsString);
 
         fileWriter.flush();
+
+        if(!Core.userInfo.getThisTheme().getEmail().equals("")) {
+            try {
+
+                String endMessage = "\n\n\n----------------------------------\nЕсли у вас есть какие-либо вопросы, " +
+                        "касающиеся программы, напишите на этот адрес: catstack.team@gmail.com";
+
+                MailUtils.sendMessage(Core.userInfo.getThisTheme().getEmail(), "Результаты по тесту \"" +
+                        Core.userInfo.getThisTheme().getName() + "\"", resultsString + endMessage);
+            } catch (Exception ex) {
+                System.out.println("Can't send email");
+                System.out.println(Core.userInfo.getThisTheme().getEmail());
+                ex.printStackTrace();
+            }
+        }
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Информация");
+        alert.setContentText("Количество оставшихся попыток по данной теме: " + Core.userInfo.getThisTheme().getTriesCount());
+        alert.setHeaderText("Тест окончен!");
+        alert.showAndWait();
+
     }
 
     public void onAgainClick(ActionEvent actionEvent) throws Exception {
-        GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
+        if (Core.userInfo.getThisTheme().getTriesCount() >= 1) {
+            GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("У вас закончились попытки");
+            alert.setContentText("Обратитесь к учиителю, чтобы восстановить их.");
+            alert.showAndWait();
+        }
     }
 
     public void onBackClick(ActionEvent actionEvent) throws Exception {

@@ -28,6 +28,7 @@ public class TeacherController extends GController {
     public TextField result3;
     public TextField result4;
     public VBox themeConfigVBox;
+    public TextField emailField;
 
     Timer timer;
 
@@ -80,6 +81,11 @@ public class TeacherController extends GController {
             Core.userInfo.getThisTheme().setResult2(Integer.parseInt(result2.getText()));
             Core.userInfo.getThisTheme().setResult3(Integer.parseInt(result3.getText()));
             Core.userInfo.getThisTheme().setResult4(Integer.parseInt(result4.getText()));
+            if(!emailField.getText().replaceAll(" ", "").equals("")) {
+                Core.userInfo.getThisTheme().setEmail(emailField.getText().replaceAll(" ", ""));
+            } else {
+                Core.userInfo.getThisTheme().setEmail("");
+            }
         }
 
         boolean canSave = true;
@@ -201,6 +207,7 @@ public class TeacherController extends GController {
                 result2.setText("" + Core.userInfo.getThisTheme().getResult2());
                 result3.setText("" + Core.userInfo.getThisTheme().getResult3());
                 result4.setText("" + Core.userInfo.getThisTheme().getResult4());
+                emailField.setText("" + Core.userInfo.getThisTheme().getEmail());
                 taskSelector.setText("Задание");
             });
         }

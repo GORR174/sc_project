@@ -6,6 +6,7 @@ public class Theme {
 
     private String name = "Название темы";
     private String help = null;
+    private String email = "";
     private int time = 30;
     private int qCount = 15;
     private int result2 = 20;
@@ -13,6 +14,7 @@ public class Theme {
     private int result4 = 80;
     private int result5 = 100;
     private ArrayList<ThemeTask> tasks = new ArrayList<>();
+    private int triesCount = 3;
 
     public Theme(){
 
@@ -107,5 +109,21 @@ public class Theme {
 
     public void setHelp(String help) {
         this.help = help;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getTriesCount() {
+        return triesCount;
+    }
+
+    public void setTriesCount(int triesCount) {
+        this.triesCount = triesCount;
     }
 }

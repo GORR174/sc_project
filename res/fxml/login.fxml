@@ -82,15 +82,28 @@
             </VBox>
          </center>
          <bottom>
-            <VBox alignment="TOP_RIGHT" prefHeight="36.0" prefWidth="864.0" BorderPane.alignment="CENTER">
+            <HBox prefHeight="48.0" prefWidth="864.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#OnAboutClick" text="Об авторе">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
+                  <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onReTriesClick" text="Восстановить попытки">
+                           <VBox.margin>
+                              <Insets left="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#OnAboutClick" text="Об авторе">
+                           <VBox.margin>
+                              <Insets right="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </bottom>
       </BorderPane>
    </children>

@@ -69,7 +69,7 @@ public class AddTaskController extends GController implements HavingImage {
     }
 
     public void setBlankImage() {
-        taskImage.setImage(new Image("/ru/catstack/sc_project/images/blank.png"));
+        taskImage.setImage(new Image("/ru/catstack/sc_project/resources/images/blank.png"));
         imagePath = null;
     }
 

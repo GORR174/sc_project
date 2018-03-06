@@ -1,18 +1,25 @@
 package ru.catstack.sc_project.engine;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.stage.WindowEvent;
 import ru.catstack.fx_engine.engine.App;
 import ru.catstack.fx_engine.impl.GApplication;
 import ru.catstack.fx_engine.resources.GApp;
+import ru.catstack.sc_project.objects.help_objects.PasswordDialog;
+import ru.catstack.sc_project.objects.user.Teacher;
 import ru.catstack.sc_project.objects.user.UserInfo;
 import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
 
 import java.io.File;
+import java.util.Optional;
 
 public class Main extends GApplication {
 
     static final int MIN_WIDTH = 864;
-    static final int MIN_HEIGHT = 600;
+    static final int MIN_HEIGHT = 602;
 
     public static void main(String[] args) {
         Main main = new Main();
@@ -39,6 +46,41 @@ public class Main extends GApplication {
 
         Core.userInfo = new UserInfo();
 
+        File teacherFile = new File("teacher.json");
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        if(teacherFile.exists())
+            Core.teacher = mapper.readValue(teacherFile, Teacher[].class);
+        else {
+            for(int i=1; i<12; i++){
+                Core.teacher[i] = new Teacher();
+            }
+            mapper.writeValue(teacherFile, Core.teacher);
+        }
+
         GApp.app.setScene(FXML_FILES.LOGIN.getUrl());
+
+        GApp.app.getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+
+                PasswordDialog passwordDialog = new PasswordDialog();
+
+                Optional<String> password = passwordDialog.showAndWait();
+                if (password.isPresent() && password.get().equals("12345")) {
+
+                } else if (password.isPresent()) {
+                    event.consume();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Ошибка");
+                    alert.setContentText("Неверный пароль");
+                    alert.setHeaderText(null);
+                    alert.showAndWait();
+                } else {
+                    event.consume();
+                }
+            }
+        });
     }
 }

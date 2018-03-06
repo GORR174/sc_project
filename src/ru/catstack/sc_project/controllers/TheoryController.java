@@ -3,6 +3,7 @@ package ru.catstack.sc_project.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -105,7 +106,15 @@ public class TheoryController extends GController {
     }
 
     public void onStartClick(ActionEvent actionEvent) throws Exception {
-        GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
+        if (Core.userInfo.getThisTheme().getTriesCount() >= 1) {
+            GApp.app.setScene(FXML_FILES.STUDENT.getUrl());
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Ошибка");
+            alert.setHeaderText("У вас закончились попытки");
+            alert.setContentText("Обратитесь к учиителю, чтобы восстановить их.");
+            alert.showAndWait();
+        }
     }
 
     public void onBackClick(ActionEvent actionEvent) throws Exception {

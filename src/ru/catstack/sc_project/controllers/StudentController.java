@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import ru.catstack.fx_engine.impl.GController;
 import ru.catstack.fx_engine.resources.GApp;
@@ -32,6 +34,7 @@ public class StudentController extends GController{
     public TextField resultField;
     public Label lastResult;
     public ImageView taskImage;
+    public BorderPane imageBorderPane;
 
 
     private boolean trigger = false;
@@ -76,6 +79,8 @@ public class StudentController extends GController{
                 }
             }
         });
+
+        Core.userInfo.getThisTheme().setTriesCount(Core.userInfo.getThisTheme().getTriesCount()-1);
     }
 
     public void onEndClick(ActionEvent actionEvent) throws Exception {
@@ -123,8 +128,16 @@ public class StudentController extends GController{
         if (thisStudentTask.getTask().getImageFile() != null) {
             Image thisTaskImage = ImageUtils.getAssetsImage(thisStudentTask.getTask().getImageFile());
             taskImage.setImage(thisTaskImage);
+            imageBorderPane.setVisible(true);
+            imageBorderPane.setMinHeight(206);
+            imageBorderPane.setMaxHeight(206);
+            taskText.setMinHeight(Region.USE_COMPUTED_SIZE);
         } else {
             taskImage.setImage(null);
+            imageBorderPane.setVisible(false);
+            imageBorderPane.setMinHeight(4);
+            imageBorderPane.setMaxHeight(4);
+            taskText.setMinHeight(taskText.getPrefHeight()+100);
         }
         boolean all = false;
         for (StudentTask studentTask : Core.tasks.getTasks()) {
