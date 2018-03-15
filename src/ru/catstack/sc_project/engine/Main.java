@@ -1,6 +1,5 @@
 package ru.catstack.sc_project.engine;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.stage.WindowEvent;
@@ -8,10 +7,10 @@ import ru.catstack.fx_engine.engine.App;
 import ru.catstack.fx_engine.impl.GApplication;
 import ru.catstack.fx_engine.resources.GApp;
 import ru.catstack.sc_project.objects.help_objects.PasswordDialog;
-import ru.catstack.sc_project.objects.user.Teacher;
 import ru.catstack.sc_project.objects.user.UserInfo;
 import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
+import ru.catstack.sc_project.utils.TeacherFileLoader;
 
 import java.io.File;
 import java.util.Optional;
@@ -46,18 +45,7 @@ public class Main extends GApplication {
 
         Core.userInfo = new UserInfo();
 
-        File teacherFile = new File("teacher.json");
-
-        ObjectMapper mapper = new ObjectMapper();
-
-        if(teacherFile.exists())
-            Core.teacher = mapper.readValue(teacherFile, Teacher[].class);
-        else {
-            for(int i=1; i<12; i++){
-                Core.teacher[i] = new Teacher();
-            }
-            mapper.writeValue(teacherFile, Core.teacher);
-        }
+        TeacherFileLoader.load();
 
         GApp.app.setScene(FXML_FILES.LOGIN.getUrl());
 

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="864.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.catstack.sc_project.controllers.AddTestTaskController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Добавить задание">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="12.0" left="15.0" right="15.0" top="14.0" />
+               </VBox.margin>
+            </Label>
+            <TextArea fx:id="taskText" maxHeight="128.0" maxWidth="649.0" minHeight="128.0" minWidth="649.0" prefHeight="128.0" prefWidth="649.0" promptText="Текст задания" style="-fx-border-color: CCCCCC; -fx-background-color: FCFCFC; -fx-border-width: 5; -fx-border-radius: 5;" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="16.0" top="8.0" />
+               </VBox.margin>
+            </TextArea>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets top="8.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Правильный вариант:">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="8.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="rightAnswerField" prefHeight="25.0" prefWidth="472.0">
+                           <HBox.margin>
+                              <Insets right="120.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Вариант ответа 2:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="8.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="answer2Field" prefHeight="25.0" prefWidth="472.0">
+                           <HBox.margin>
+                              <Insets right="120.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Вариант ответа 3:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="8.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="answer3Field" prefHeight="25.0" prefWidth="472.0">
+                           <HBox.margin>
+                              <Insets right="120.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Вариант ответа 4:">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="8.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="answer4Field" prefHeight="25.0" prefWidth="472.0">
+                           <HBox.margin>
+                              <Insets right="120.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <BorderPane prefHeight="75.0" prefWidth="864.0">
+               <center>
+                  <HBox alignment="CENTER" maxHeight="100.0" prefHeight="90.0" prefWidth="864.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Button maxWidth="90.0" minWidth="90.0" mnemonicParsing="false" onAction="#onCancelClick" text="Отмена">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="150.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button maxWidth="90.0" minWidth="90.0" mnemonicParsing="false" onAction="#onAddClick" text="Добавить">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </center>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </BorderPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

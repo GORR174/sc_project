@@ -2,15 +2,15 @@ package ru.catstack.sc_project.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import ru.catstack.fx_engine.impl.GController;
 import ru.catstack.fx_engine.resources.GApp;
@@ -23,7 +23,9 @@ import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
 import ru.catstack.sc_project.utils.ImageUtils;
 
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 public class StudentController extends GController{
 
@@ -35,6 +37,7 @@ public class StudentController extends GController{
     public Label lastResult;
     public ImageView taskImage;
     public BorderPane imageBorderPane;
+    public VBox radioVBox;
 
 
     private boolean trigger = false;
@@ -88,12 +91,24 @@ public class StudentController extends GController{
     }
 
     public void onSendClick(ActionEvent actionEvent) throws Exception {
-        Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).setLastResult(resultField.getText());
+        StudentTask thisStudentTask = Core.tasks.getTasks().get(Core.student.thisTaskNumber-1);
+        if(!thisStudentTask.getTask().isTestTask()) {
+            thisStudentTask.setLastResult(resultField.getText());
 
-        if(Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).getTask().getResult().equalsIgnoreCase(resultField.getText()))
-            Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).setCorrectly(true);
-        else
-            Core.tasks.getTasks().get(Core.student.thisTaskNumber-1).setCorrectly(false);
+            if (thisStudentTask.getTask().getResult().equalsIgnoreCase(resultField.getText()))
+                thisStudentTask.setCorrectly(true);
+            else
+                thisStudentTask.setCorrectly(false);
+        } else {
+            thisStudentTask.setCorrectly(false);
+            for (Node node : radioVBox.getChildren()) {
+                if(((RadioButton)node).isSelected()) {
+                    thisStudentTask.setLastResult(((RadioButton)node).getText());
+                    if (thisStudentTask.getTask().getResult().equalsIgnoreCase(((RadioButton)node).getText()))
+                        thisStudentTask.setCorrectly(true);
+                }
+            }
+        }
 
         if(Core.student.thisTaskNumber < Core.userInfo.getThisTheme().getqCount())
             Core.student.thisTaskNumber++;
@@ -125,19 +140,61 @@ public class StudentController extends GController{
         lastResult.setText("Ваш ответ: " + thisStudentTask.getLastResult());
         taskText.setText(thisStudentTask.getTask().getText());
         resultField.setText("");
-        if (thisStudentTask.getTask().getImageFile() != null) {
-            Image thisTaskImage = ImageUtils.getAssetsImage(thisStudentTask.getTask().getImageFile());
-            taskImage.setImage(thisTaskImage);
-            imageBorderPane.setVisible(true);
-            imageBorderPane.setMinHeight(206);
-            imageBorderPane.setMaxHeight(206);
-            taskText.setMinHeight(Region.USE_COMPUTED_SIZE);
+        radioVBox.getChildren().clear();
+        resultField.setDisable(false);
+        if(!thisStudentTask.getTask().isTestTask()) {
+            radioVBox.setVisible(false);
+            radioVBox.setMinHeight(0);
+            radioVBox.setMaxHeight(0);
+            if (thisStudentTask.getTask().getImageFile() != null) {
+                Image thisTaskImage = ImageUtils.getAssetsImage(thisStudentTask.getTask().getImageFile());
+                taskImage.setImage(thisTaskImage);
+                imageBorderPane.setVisible(true);
+                imageBorderPane.setMinHeight(206);
+                imageBorderPane.setMaxHeight(206);
+                taskText.setMinHeight(Region.USE_COMPUTED_SIZE);
+            } else {
+                taskImage.setImage(null);
+                imageBorderPane.setVisible(false);
+                imageBorderPane.setMinHeight(4);
+                imageBorderPane.setMaxHeight(4);
+                taskText.setMinHeight(taskText.getPrefHeight() + 100);
+            }
         } else {
             taskImage.setImage(null);
-            imageBorderPane.setVisible(false);
-            imageBorderPane.setMinHeight(4);
-            imageBorderPane.setMaxHeight(4);
-            taskText.setMinHeight(taskText.getPrefHeight()+100);
+            imageBorderPane.setVisible(true);
+            imageBorderPane.setMinHeight(0);
+            imageBorderPane.setMaxHeight(0);
+            taskText.setMinHeight(Region.USE_COMPUTED_SIZE);
+            resultField.setDisable(true);
+
+            radioVBox.setVisible(true);
+            radioVBox.setMinHeight(220);
+            radioVBox.setMaxHeight(220);
+
+            ToggleGroup group = new ToggleGroup();
+
+            ArrayList<RadioButton> radioButtons = new ArrayList<>();
+            radioButtons.add(new RadioButton(thisStudentTask.getTask().getResult()));
+            if(!thisStudentTask.getTask().getAnswer2().equals(""))
+                radioButtons.add(new RadioButton(thisStudentTask.getTask().getAnswer2()));
+            if(!thisStudentTask.getTask().getAnswer3().equals(""))
+                radioButtons.add(new RadioButton(thisStudentTask.getTask().getAnswer3()));
+            if(!thisStudentTask.getTask().getAnswer4().equals(""))
+                radioButtons.add(new RadioButton(thisStudentTask.getTask().getAnswer4()));
+
+            int size = radioButtons.size();
+            for (int i = 0; i < size; i++) {
+                int r = new Random().nextInt(radioButtons.size());
+                radioVBox.getChildren().add(radioButtons.get(r));
+                radioButtons.remove(r);
+            }
+
+            ((RadioButton)radioVBox.getChildren().get(0)).setSelected(true);
+            for (Node node : radioVBox.getChildren()) {
+                ((RadioButton)node).setToggleGroup(group);
+                ((RadioButton) node).setPadding(new Insets(24, 0, 0 ,0));
+            }
         }
         boolean all = false;
         for (StudentTask studentTask : Core.tasks.getTasks()) {

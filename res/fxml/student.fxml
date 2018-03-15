@@ -36,6 +36,7 @@
                   <Insets top="6.0" />
                </VBox.margin>
             </BorderPane>
+            <VBox fx:id="radioVBox" maxHeight="0.0" maxWidth="600.0" minHeight="0.0" prefHeight="0.0" visible="false" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label fx:id="latestTime" minWidth="254.0" prefHeight="35.0" prefWidth="254.0" text="Осталось времени: 00:12:47">

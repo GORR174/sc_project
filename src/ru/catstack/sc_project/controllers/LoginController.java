@@ -75,7 +75,7 @@ public class LoginController extends GController {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Ошибка");
                         alert.setHeaderText("У вас закончились попытки");
-                        alert.setContentText("Обратитесь к учиителю, чтобы восстановить их.");
+                        alert.setContentText("Обратитесь к учителю, чтобы восстановить их.");
                         alert.showAndWait();
                     }
                 }

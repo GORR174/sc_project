@@ -13,6 +13,7 @@ import ru.catstack.sc_project.objects.ThemeTask;
 import ru.catstack.sc_project.objects.help_objects.Timer;
 import ru.catstack.sc_project.resources.Core;
 import ru.catstack.sc_project.resources.FXML_FILES;
+import ru.catstack.sc_project.utils.TeacherFileLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,10 +71,10 @@ public class TeacherController extends GController {
     public void onBackClick(ActionEvent actionEvent) throws Exception {
         GApp.app.setScene(FXML_FILES.LOGIN.getUrl());
         timer.stop();
+        TeacherFileLoader.load();
     }
 
     public void onSaveClick(ActionEvent actionEvent) throws IOException {
-
 
         if (Core.userInfo.getThisTheme() != null) {
             Core.userInfo.getThisTheme().setTime(Integer.parseInt(workTime.getText()));
@@ -96,6 +97,12 @@ public class TeacherController extends GController {
         }
 
         if(canSave) {
+
+            for (int i = 1; i <= 11; i++) {
+                for (Theme theme : Core.teacher[i].getThemes()) {
+                    theme.setTriesCount(3);
+                }
+            }
 
             ObjectMapper mapper = new ObjectMapper();
             mapper.writeValue(new File("teacher.json"), Core.teacher);
@@ -168,13 +175,17 @@ public class TeacherController extends GController {
 
     public void onAddNewTask(ActionEvent actionEvent) throws Exception {
         if(Core.userInfo.getThisTheme() != null) {
-            GApp.app.addModalWindow(FXML_FILES.ADD_TASK.getUrl(), "Добавить новую задачу", GApp.app.getStage(), false);
+            GApp.app.addModalWindow(FXML_FILES.ADD_TASK_SELECTOR.getUrl(), "Выбор типа задания", GApp.app.getStage(), false);
         }
     }
 
     public void onTaskChange(ActionEvent actionEvent) throws Exception {
         if(Core.userInfo.getThisTheme() != null && Core.userInfo.getThisTask() != null) {
-            GApp.app.addModalWindow(FXML_FILES.EDIT_TASK.getUrl(), "Редактировать задачу", GApp.app.getStage(), false);
+            if(Core.userInfo.getThisTask().isTestTask()){
+                GApp.app.addModalWindow(FXML_FILES.EDIT_TEST_TASK.getUrl(), "Редактировать задачу", GApp.app.getStage(), false);
+            } else {
+                GApp.app.addModalWindow(FXML_FILES.EDIT_TASK.getUrl(), "Редактировать задачу", GApp.app.getStage(), false);
+            }
         }
     }
 
